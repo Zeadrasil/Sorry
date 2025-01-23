@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class BoardSpace : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[SerializeField] public BoardSpace nextSpace;
+	[SerializeField] public BoardSpace prevSpace;
+	[SerializeField] public BoardSpace goingHome;
+	//[SerializeField] public Color homeColor
+	[SerializeField] public bool isHomeSpace;
+	[SerializeField] public bool isSlide;
 }

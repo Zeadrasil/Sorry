@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Hand
 {
-    // public List<Card> cards
+    public List<Card> cards;
 
     public void AddCard()
     {
@@ -12,6 +12,6 @@ public class Hand
 
     public void DiscardCard(int CardAmount)
     {
-
+        
     }
 }

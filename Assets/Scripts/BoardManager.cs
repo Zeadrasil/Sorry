@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
-	//[SerializeField] public pawns List<Pawn>
+	[SerializeField] public List<Pawn> pawns;
 	//[SerializeField] public TurnManager turnManager
 	//[SerializeField] public CardManager cardManager
 	[SerializeField] public BoardSpace[] starts;

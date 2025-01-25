@@ -18,10 +18,6 @@ public class TurnManager : MonoBehaviour
         players[3].color = E_Color.Green;
     }
 
-    public void StartTurn()
-    {
-
-    }
 
     public void EndTurn()
     {

@@ -2,6 +2,6 @@ using UnityEngine;
 
 public class Pawn
 {
-    public int location;
+    public BoardSpace location;
     public E_Color color;
 }

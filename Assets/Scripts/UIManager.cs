@@ -154,4 +154,13 @@ public class UIManager : MonoBehaviour
         }
         winText.text = $"Congratulations, {color} has won the game!";
     }
+
+    private void Update()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * 25 * Time.deltaTime * camera.orthographicSize;
+            camera.orthographicSize = Mathf.Max(1, camera.orthographicSize);
+        }
+    }
 }

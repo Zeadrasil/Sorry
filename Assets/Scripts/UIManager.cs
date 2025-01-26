@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public Canvas variantSelectionScreen;
     public TMP_Text variantDescriptionA;
     public TMP_Text variantDescriptionB;
+    public GameObject[][] cardHolders;
 
     public void TransitionPlayerScene()
     {
@@ -161,6 +162,19 @@ public class UIManager : MonoBehaviour
         {
             camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * 25 * Time.deltaTime * camera.orthographicSize;
             camera.orthographicSize = Mathf.Max(1, camera.orthographicSize);
+        }
+    }
+    public void UpdateCards()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            for(int j = 0; j < 4; j++)
+            {
+                if (turnManager.players[i] != null && turnManager.players[i].playerHand.cards.Count > j)
+                {
+                    turnManager.players[i].playerHand.cards[j].GetComponentInChildren<Canvas>().transform.SetParent(cardHolders[i][j].transform, false);
+                }
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ public class TurnManager : MonoBehaviour
     public byte playerCount = 4;
     public Player[] players = new Player[4];
     public E_Color currentTurn = E_Color.Red;
+    public BoardManager boardManager;
 
     private void Start()
     {
@@ -13,9 +14,13 @@ public class TurnManager : MonoBehaviour
             players[0] = new Player();
         }
         players[0].color = currentTurn;
+        players[0].playerHand.deck = boardManager.deck;
         players[1].color = E_Color.Blue;
+        players[1].playerHand.deck = boardManager.deck;
         players[2].color = E_Color.Yellow;
+        players[2].playerHand.deck = boardManager.deck;
         players[3].color = E_Color.Green;
+        players[3].playerHand.deck = boardManager.deck;
     }
 
 

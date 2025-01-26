@@ -104,9 +104,9 @@ public class UIManager : MonoBehaviour
         variantSelectionScreen.enabled = false;
     }
 
-    public void SelectPlayerCount(byte count)
+    public void SelectPlayerCount(int count)
     {
-        turnManager.playerCount = count;
+        turnManager.playerCount = (byte)count;
         turnManager.EndTurn();
         while (turnManager.currentTurn != E_Color.Red)
         {

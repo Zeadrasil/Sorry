@@ -78,7 +78,7 @@ public class BoardManager : MonoBehaviour
 
 				pawn.location = space;
 
-				if (pawn.location.isSlide > 0)
+				if (pawn.location.isSlide > 0 && pawn.color != pawn.location.homeColor)
 				{
 					Slide(pawn.location.isSlide, pawn);
 				}

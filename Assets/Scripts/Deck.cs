@@ -11,10 +11,11 @@ using Random = System.Random;
 
 public class Deck : MonoBehaviour
 
-{   public Random RNG = new Random();
+{
+    public Random RNG = new Random();
     public List<Card> deck;
     public List<Card> discard;
-    public GameObject[] prefabs = new GameObject[11];
+    public List<CardData> prefabs = new List<CardData>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,18 +53,18 @@ public class Deck : MonoBehaviour
         deck.RemoveAt(0);
         return drawnCard;
     }
-    public  void populateDeck()
+    public void populateDeck()
     {
         int prefabIndex = 0;
         int chkMax = 0;
         int reqCardAmount = 5;
         for (int i = 0; i < reqCardAmount && chkMax < 45; i++, chkMax++)
         {
-            var c = prefabs[prefabIndex].GetComponent<Card>();
+            CardData c = prefabs[prefabIndex];
             Card card = new Card(c.Type, c.Description);
             //Card card = prefabs[prefabIndex].GetComponent<Card>();
             deck.Add(card);
-            if(i == reqCardAmount - 1)
+            if (i == reqCardAmount - 1)
             {
                 prefabIndex++;
                 reqCardAmount = 4;

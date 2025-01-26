@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Card : MonoBehaviour
+public class Card
 {
     public int Type;
     public string Description;

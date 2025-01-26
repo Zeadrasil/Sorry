@@ -111,6 +111,8 @@ public class UIManager : MonoBehaviour
         {
             turnManager.EndTurn();
         }
+        transitionScreen.enabled = true;
+        startMenu.enabled = true;
     }
 
     private void Start()

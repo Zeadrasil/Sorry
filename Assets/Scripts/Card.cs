@@ -11,4 +11,13 @@ public class Card : MonoBehaviour
         Type = type;
         Description = description;
     }
+
+    public override string ToString()
+    {
+        if(Type == 0)
+        {
+            return "Sorry!";
+        }
+        return Type.ToString();
+    }
 }

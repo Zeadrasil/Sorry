@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     public Canvas variantSelectionScreen;
     public TMP_Text variantDescriptionA;
     public TMP_Text variantDescriptionB;
-    public GameObject[][] cardHolders;
+    public TMP_Text[][][] cardDataHolders;
 
     public void TransitionPlayerScene()
     {
@@ -164,16 +164,14 @@ public class UIManager : MonoBehaviour
             camera.orthographicSize = Mathf.Max(1, camera.orthographicSize);
         }
     }
-    public void UpdateCards()
+    public void UpdateDisplay()
     {
         for(int i = 0; i < 4; i++)
         {
-            for(int j = 0; j < 4; j++)
+            if(i < turnManager.players[(int)turnManager.currentTurn].playerHand.cards.Count)
             {
-                if (turnManager.players[i] != null && turnManager.players[i].playerHand.cards.Count > j)
-                {
-                    turnManager.players[i].playerHand.cards[j].GetComponentInChildren<Canvas>().transform.SetParent(cardHolders[i][j].transform, false);
-                }
+                cardDataHolders[(int)turnManager.currentTurn][i][0].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].ToString();
+                cardDataHolders[(int)turnManager.currentTurn][i][1].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].Description;
             }
         }
     }

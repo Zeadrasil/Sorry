@@ -83,6 +83,8 @@ public class BoardManager : MonoBehaviour
 				{
 					Slide(pawn.location.isSlide, pawn);
 				}
+
+				pawn.Reposition();
 				break;
 		}
 	}
@@ -110,6 +112,7 @@ public class BoardManager : MonoBehaviour
             if (start.homeColor == pawn.color)
 			{
 				pawn.location = start;
+				pawn.Reposition();
 			}
         }
     }

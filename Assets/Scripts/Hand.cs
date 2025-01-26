@@ -13,7 +13,7 @@ public class Hand
 
     public void DiscardCard(int cardIndex)
     {
-        if(cardIndex > 3)
+        if (cardIndex > 3)
         {
             cards.Clear();
         }

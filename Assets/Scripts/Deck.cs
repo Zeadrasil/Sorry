@@ -47,7 +47,10 @@ public class Deck : MonoBehaviour
     }
     public Card drawCard()
     {
-        return deck[0];
+        Card drawnCard = deck[0];
+        discard.Add(drawnCard);
+        deck.RemoveAt(0);
+        return drawnCard;
     }
     public  void populateDeck()
     {

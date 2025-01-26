@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Hand
 {
-    public List<Card> cards;
+    public List<Card> cards = new List<Card>();
     public Deck deck;
 
     public void AddCard()

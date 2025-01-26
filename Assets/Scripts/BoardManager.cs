@@ -7,6 +7,7 @@ public class BoardManager : MonoBehaviour
 	//[SerializeField] public TurnManager turnManager
 	//[SerializeField] public CardManager cardManager
 	[SerializeField] public List<BoardSpace> starts;
+	public Deck deck;
 
 	public List<Pawn> GetMoveablePawns(E_Color playerColor, Card usedCard) {
 		List<Pawn> gottenpawns = new List<Pawn>();

@@ -16,12 +16,13 @@ public class UIManager : MonoBehaviour
     public Canvas yellowTurn;
     public Canvas transitionScreen;
     public TurnManager turnManager;
-    public Camera camera;
+    public new Camera camera;
     public int selectedCard = -1;
     public bool variant = false;
     public Canvas variantSelectionScreen;
     public TMP_Text variantDescriptionA;
     public TMP_Text variantDescriptionB;
+    public TMP_Text[][][] cardDataHolders;
 
     public void TransitionPlayerScene()
     {
@@ -36,7 +37,7 @@ public class UIManager : MonoBehaviour
         else
         {
             transitionScreen.enabled = false;
-            switch(turnManager.currentTurn)
+            switch (turnManager.currentTurn)
             {
                 case E_Color.Blue:
                     {
@@ -107,7 +108,7 @@ public class UIManager : MonoBehaviour
     {
         turnManager.playerCount = count;
         turnManager.EndTurn();
-        while(turnManager.currentTurn != E_Color.Red)
+        while (turnManager.currentTurn != E_Color.Red)
         {
             turnManager.EndTurn();
         }
@@ -129,7 +130,7 @@ public class UIManager : MonoBehaviour
     public void DisplayWin()
     {
         string color = "";
-        switch(turnManager.currentTurn)
+        switch (turnManager.currentTurn)
         {
             case E_Color.Blue:
                 {
@@ -153,5 +154,25 @@ public class UIManager : MonoBehaviour
                 }
         }
         winText.text = $"Congratulations, {color} has won the game!";
+    }
+
+    private void Update()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * 25 * Time.deltaTime * camera.orthographicSize;
+            camera.orthographicSize = Mathf.Max(1, camera.orthographicSize);
+        }
+    }
+    public void UpdateDisplay()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if(i < turnManager.players[(int)turnManager.currentTurn].playerHand.cards.Count)
+            {
+                cardDataHolders[(int)turnManager.currentTurn][i][0].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].ToString();
+                cardDataHolders[(int)turnManager.currentTurn][i][1].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].Description;
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@ public class BoardSpace : MonoBehaviour
 	[SerializeField] public BoardSpace goingHome;
 	[SerializeField] public E_Color homeColor;
 	[SerializeField] public bool isHomeSpace;
-	[SerializeField] public bool isSlide;
+	[SerializeField] public int isSlide;
 
 	public BoardSpace Traverse(int distance, E_Color pawnColor)
 	{

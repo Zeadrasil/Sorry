@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     public Canvas yellowTurn;
     public Canvas transitionScreen;
     public TurnManager turnManager;
-    public Camera camera;
+    public new Camera camera;
     public int selectedCard = -1;
     public bool variant = false;
     public Canvas variantSelectionScreen;
@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
         else
         {
             transitionScreen.enabled = false;
-            switch(turnManager.currentTurn)
+            switch (turnManager.currentTurn)
             {
                 case E_Color.Blue:
                     {
@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
     {
         turnManager.playerCount = count;
         turnManager.EndTurn();
-        while(turnManager.currentTurn != E_Color.Red)
+        while (turnManager.currentTurn != E_Color.Red)
         {
             turnManager.EndTurn();
         }
@@ -129,7 +129,7 @@ public class UIManager : MonoBehaviour
     public void DisplayWin()
     {
         string color = "";
-        switch(turnManager.currentTurn)
+        switch (turnManager.currentTurn)
         {
             case E_Color.Blue:
                 {

@@ -11,7 +11,7 @@ public class TurnManager : MonoBehaviour
     {
         for (int index = 0; index < players.Length; index++)
         {
-            players[0] = new Player();
+            players[index] = new Player();
         }
         players[0].color = currentTurn;
         players[0].playerHand.deck = boardManager.deck;

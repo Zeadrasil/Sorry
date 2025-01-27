@@ -135,8 +135,6 @@ public class BoardManager : MonoBehaviour
 		{
 			switch(uiManager.variant)
 			{
-				case 0:
-					return 7;
                 case 1:
                     return previousPawn == null ? 6 : 1;
                 case 2:
@@ -149,6 +147,8 @@ public class BoardManager : MonoBehaviour
                     return previousPawn == null ? 2 : 5;
                 case 6:
                     return previousPawn == null ? 1 : 6;
+				default:
+					return 7;
             }
 		}
 		else if (type == 10)
@@ -159,6 +159,10 @@ public class BoardManager : MonoBehaviour
 		{
 			return 0;
 		}
+		else if(type == 4)
+		{
+			return -4;
+		}
 		return type;
 	}
 
@@ -168,10 +172,10 @@ public class BoardManager : MonoBehaviour
 		foreach (Pawn pawn in pawns)
 		{
 			if ((pawn.color == playerColor && usedCard.Type != 0) || (usedCard.Type == 0 && pawn.color != playerColor) || (uiManager.secondEleven))
-			{
-				bool canTraverse = (pawn.location.Traverse(usedCard.Type, playerColor) != null);
+            {
+                int actualMovement = getMovementDistance(usedCard.Type);
+                bool canTraverse = actualMovement == 0 ? true : (pawn.location.Traverse(actualMovement, playerColor) != null);
 
-				int actualMovement = getMovementDistance(usedCard.Type);
 				foreach (Pawn paw in pawns)
 				{
 					if (actualMovement != 0)
@@ -184,20 +188,27 @@ public class BoardManager : MonoBehaviour
 							}
 						}
 					}
-					if(previousPawn != null && paw == previousPawn)
-					{
-						canTraverse = false;
-					}
-				}
+                }
+                if (previousPawn != null && pawn == previousPawn)
+                {
+                    canTraverse = false;
+                }
 
-				if (canTraverse)
+                if (canTraverse)
 				{
 					switch (usedCard.Type)
 					{
 						case 0:
-						case 11:
+                            {
+                                if (!pawn.location.isHomeSpace && !starts.Contains(pawn.location))
+                                {
+                                    gottenpawns.Add(pawn);
+                                }
+                                break;
+                            }
+                        case 11:
 							{
-								if (!pawn.location.isHomeSpace && !starts.Contains(pawn.location))
+								if (!pawn.location.isHomeSpace && !starts.Contains(pawn.location) && (uiManager.secondEleven || (pawn.color == turnManager.currentTurn) ))
 								{
 									gottenpawns.Add(pawn);
 								}
@@ -224,8 +235,12 @@ public class BoardManager : MonoBehaviour
 	}
 
 	public void MovePawnNumber(Pawn pawn, int distance)
-	{
-		BoardSpace space = pawn.location.Traverse(distance, pawn.color);
+    {
+        if (pawn.location.prevSpace == null)
+        {
+            distance = 1;
+        }
+        BoardSpace space = pawn.location.Traverse(distance, pawn.color);
 
 		if (space == null)
 		{
@@ -240,9 +255,7 @@ public class BoardManager : MonoBehaviour
 				PawnDie(p);
 			}
 		}
-
 		pawn.location = space;
-
 		if (pawn.location.isSlide > 0 && pawn.color != pawn.location.homeColor)
 		{
 			Slide(pawn.location.isSlide, pawn);
@@ -260,7 +273,10 @@ public class BoardManager : MonoBehaviour
 			case 0: // Sorry card
 				MovePawnSorry(pawn);
 				break;
-			case 7:
+			case 4:
+                MovePawnNumber(pawn, -4);
+                break;
+            case 7:
 				MovePawn7(pawn, selection);
 				break;
 			case 10:

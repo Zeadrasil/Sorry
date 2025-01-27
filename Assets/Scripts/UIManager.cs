@@ -80,13 +80,14 @@ public class UIManager : MonoBehaviour
                     redTurn.enabled = true;
                     break;
             }
-            UpdateDisplay();
         }
+        UpdateDisplay();
     }
 
     public Pawn SelectPawn()
     {
         Vector3 position = camera.ScreenToWorldPoint(Input.mousePosition);
+        position.z = 0;
         foreach (Pawn pawn in board.GetMoveablePawns(turnManager.currentTurn, turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard]))
          {
             if (Vector3.Distance(pawn.gameObject.transform.position, position) < 2f/7f)
@@ -115,16 +116,18 @@ public class UIManager : MonoBehaviour
             {
                 secondSeven = true;
             }
-            else if(!(!secondEleven && turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard].Type == 11 && variant != 0))
+            else if(!secondEleven && turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard].Type == 11 && variant != 0)
             {
-                DiscardCard(true);
+                secondEleven = true;
             }
-            if(board.CheckWin(turnManager.currentTurn))
+            else if(board.CheckWin(turnManager.currentTurn))
             {
                 DisplayWin();
             }
             else
             {
+                DiscardCard(true);
+                UpdateDisplay();
                 turnManager.EndTurn();
             }
         }
@@ -132,7 +135,7 @@ public class UIManager : MonoBehaviour
 
     public void CancelPlay()
     {
-        if (!secondSeven)
+        if (!secondSeven && !secondEleven && !variantSelectionScreen.enabled && !sevenSelectionScreen.enabled)
         {
             selectedCard = -1;
             variant = -1;
@@ -232,6 +235,9 @@ public class UIManager : MonoBehaviour
         transitionScreen.enabled = false;
         variantSelectionScreen.enabled = false;
         winMenu.enabled = false;
+        sevenSelectionScreen.enabled = false;
+        afterCardPlay.enabled = false;
+        afterCardSelect.enabled = false;    
 
         cardDataHolders = new TMP_Text[4, 2, 4];
         for(int i = 0; i < 4; i++)
@@ -283,6 +289,10 @@ public class UIManager : MonoBehaviour
             camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * 25 * Time.deltaTime * camera.orthographicSize;
             camera.orthographicSize = Mathf.Max(1, camera.orthographicSize);
         }
+        if(afterCardSelect.enabled && Input.GetMouseButtonDown(0))
+        {
+            PlayCard();
+        }
     }
     public void UpdateDisplay()
     {
@@ -292,6 +302,11 @@ public class UIManager : MonoBehaviour
             {
                 cardDataHolders[(int)turnManager.currentTurn, 0, i].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].ToString();
                 cardDataHolders[(int)turnManager.currentTurn, 1, i].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].Description;
+            }
+            else
+            {
+                cardDataHolders[(int)turnManager.currentTurn, 0, i].text = "";
+                cardDataHolders[(int)turnManager.currentTurn, 1, i].text = "";
             }
         }
     }

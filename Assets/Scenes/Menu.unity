@@ -1652,6 +1652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 150949975}
   - component: {fileID: 150949974}
+  - component: {fileID: 150949976}
   m_Layer: 5
   m_Name: BlueCardSpriteHolder
   m_TagString: Untagged
@@ -1705,6 +1706,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 959.99994, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &150949976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150949973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &164452909
 GameObject:
   m_ObjectHideFlags: 0
@@ -4456,10 +4474,10 @@ RectTransform:
   - {fileID: 2000598256}
   m_Father: {fileID: 2132630520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &433684883
 GameObject:
@@ -8875,10 +8893,10 @@ RectTransform:
   - {fileID: 1109084187}
   m_Father: {fileID: 2132630520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1065840990
 GameObject:
@@ -17383,6 +17401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1882265583}
   - component: {fileID: 1882265582}
+  - component: {fileID: 1882265584}
   m_Layer: 5
   m_Name: YellowCardSpriteHolder
   m_TagString: Untagged
@@ -17436,6 +17455,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 959.99994, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1882265584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882265581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1895393742
 GameObject:
   m_ObjectHideFlags: 0
@@ -17496,6 +17532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1915374733}
   - component: {fileID: 1915374732}
+  - component: {fileID: 1915374734}
   m_Layer: 5
   m_Name: GreenCardSpriteHolder
   m_TagString: Untagged
@@ -17549,6 +17586,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 959.99994, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1915374734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915374731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1917460753
 GameObject:
   m_ObjectHideFlags: 0
@@ -19050,10 +19104,10 @@ RectTransform:
   - {fileID: 882641229}
   m_Father: {fileID: 2132630520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2024217066
 GameObject:
@@ -19989,14 +20043,14 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 426295245}
+  - {fileID: 2001818566}
+  - {fileID: 1064145477}
   - {fileID: 1198220748}
   - {fileID: 1587366872}
   - {fileID: 283512802}
   - {fileID: 1978105823}
   - {fileID: 1950228759}
-  - {fileID: 426295245}
-  - {fileID: 2001818566}
-  - {fileID: 1064145477}
   - {fileID: 132576614}
   - {fileID: 560524457}
   - {fileID: 2001282864}
@@ -20118,6 +20172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2145802915}
   - component: {fileID: 2145802914}
+  - component: {fileID: 2145802916}
   m_Layer: 5
   m_Name: RedCardSpriteHolder
   m_TagString: Untagged
@@ -20171,6 +20226,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 959.99994, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2145802916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145802913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

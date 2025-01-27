@@ -8,8 +8,8 @@ public class BoardManager : MonoBehaviour
 	//[SerializeField] public CardManager cardManager
 	[SerializeField] public UIManager uiManager;
 	[SerializeField] public List<BoardSpace> starts;
-	public Deck deck;
-
+	public TurnManager turnManager;
+	private Pawn previousPawn;
 	[SerializeField] private Pawn TestPawn;
 
 	private void Start()
@@ -129,23 +129,64 @@ public class BoardManager : MonoBehaviour
 	//	}
 	//}
 
+	private int getMovementDistance(int type)
+	{
+		if(type == 7)
+		{
+			switch(uiManager.variant)
+			{
+				case 0:
+					return 7;
+                case 1:
+                    return previousPawn == null ? 6 : 1;
+                case 2:
+                    return previousPawn == null ? 5 : 2;
+                case 3:
+                    return previousPawn == null ? 4 : 3;
+                case 4:
+                    return previousPawn == null ? 3 : 4;
+                case 5:
+                    return previousPawn == null ? 2 : 5;
+                case 6:
+                    return previousPawn == null ? 1 : 6;
+            }
+		}
+		else if (type == 10)
+		{
+			return uiManager.variant == 0 ? 10 : -1;
+		}
+		else if(type == 11 & uiManager.variant == 1)
+		{
+			return 0;
+		}
+		return type;
+	}
+
 	public List<Pawn> GetMoveablePawns(E_Color playerColor, Card usedCard) {
 		List<Pawn> gottenpawns = new List<Pawn>();
 
 		foreach (Pawn pawn in pawns)
 		{
-			if (pawn.color == playerColor)
+			if ((pawn.color == playerColor && usedCard.Type != 0) || (usedCard.Type == 0 && pawn.color != playerColor) || (uiManager.secondEleven))
 			{
 				bool canTraverse = (pawn.location.Traverse(usedCard.Type, playerColor) != null);
 
+				int actualMovement = getMovementDistance(usedCard.Type);
 				foreach (Pawn paw in pawns)
 				{
-					if (paw.color == pawn.color)
+					if (actualMovement != 0)
 					{
-						if (paw.location == pawn.location.Traverse(usedCard.Type, playerColor))
+						if (paw.color == pawn.color)
 						{
-							canTraverse = false;
+							if (paw.location == pawn.location.Traverse(usedCard.Type, playerColor))
+							{
+								canTraverse = false;
+							}
 						}
+					}
+					if(previousPawn != null && paw == previousPawn)
+					{
+						canTraverse = false;
 					}
 				}
 
@@ -153,12 +194,15 @@ public class BoardManager : MonoBehaviour
 				{
 					switch (usedCard.Type)
 					{
-						case 0: // sorry card
-							if (starts.Contains(pawn.location))
+						case 0:
+						case 11:
 							{
-								gottenpawns.Add(pawn);
+								if (!pawn.location.isHomeSpace && !starts.Contains(pawn.location))
+								{
+									gottenpawns.Add(pawn);
+								}
+								break;
 							}
-							break;
 						case 1:
 							gottenpawns.Add(pawn);
 							break;
@@ -234,7 +278,7 @@ public class BoardManager : MonoBehaviour
 	public bool CheckWin(E_Color color)
 	{
 		int wincheck = 0;
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++, wincheck = 0)
 		{
 			foreach (Pawn pawn in pawns)
 			{
@@ -281,12 +325,15 @@ public class BoardManager : MonoBehaviour
 
 	public void MovePawn7(Pawn pawn, int selection) {
 		// move the pawn an amount
-		MovePawnNumber(pawn, 7 - selection);
-		if (selection > 0)
+		MovePawnNumber(pawn, uiManager.secondSeven ? selection : 7 - selection);
+		if (selection == 0 || uiManager.secondEleven)
 		{
-			// select new pawn and move that one the remaining amount
-
+			previousPawn = null;
 		}
+		else
+        {
+            previousPawn = pawn;
+        }
 	}
 
 	public void MovePawn10(Pawn pawn, int selection) {
@@ -308,6 +355,28 @@ public class BoardManager : MonoBehaviour
 		{
 			case 1:
 				// Get pawn and do a sorry on it with another pieces
+				if(uiManager.secondEleven)
+				{
+					BoardSpace location = previousPawn.location;
+					Vector3 position = previousPawn.transform.position;
+					previousPawn.location = pawn.location;
+					previousPawn.transform.position = pawn.transform.position;
+					pawn.location = location;
+					pawn.transform.position = position;
+                    if (previousPawn.location.isSlide > 0 && previousPawn.color != previousPawn.location.homeColor)
+                    {
+                        Slide(previousPawn.location.isSlide, previousPawn);
+                    }
+                    if (pawn.location.isSlide > 0 && pawn.color != pawn.location.homeColor)
+                    {
+                        Slide(pawn.location.isSlide, pawn);
+                    }
+					previousPawn = null;
+                }
+				else
+				{
+					previousPawn = pawn;
+				}
 				break;
 			default:
 				MovePawnNumber(pawn, 11);
@@ -317,6 +386,20 @@ public class BoardManager : MonoBehaviour
 
 	public void MovePawnSorry(Pawn pawn) {
 		// Move a pawn in the start position from start to enemy pawn
+		foreach(Pawn movingPawn in pawns)
+		{
+			if(movingPawn.color == turnManager.currentTurn && movingPawn.location == starts[(int)turnManager.currentTurn])
+			{
+				movingPawn.location = pawn.location;
+				movingPawn.transform.position = pawn.transform.position;
+				PawnDie(pawn);
+                if (movingPawn.location.isSlide > 0 && movingPawn.color != movingPawn.location.homeColor)
+                {
+                    Slide(movingPawn.location.isSlide, movingPawn);
+                }
+				return;
+            }
+		}
 		// set the current pawn location to gotten pawn's location
 		// pawn.location = uiManager.getenemypawn(pawn.color).location
 	}

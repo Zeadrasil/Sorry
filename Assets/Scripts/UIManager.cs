@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     public Canvas afterCardSelect;
     public Canvas afterCardPlay;
     public bool secondSeven = false;
+    public bool secondEleven = false;
 
 
     public void TransitionPlayerScene()
@@ -51,6 +52,7 @@ public class UIManager : MonoBehaviour
             afterCardPlay.enabled = false;
             beforeCardSelect.enabled = true;
             secondSeven = false;
+            secondEleven = false;
             variant = -1;
             selectedCard = -1;
         }
@@ -100,7 +102,7 @@ public class UIManager : MonoBehaviour
         Pawn pawn = SelectPawn();
         if(pawn != null)
         {
-            board.MovePawnNumber(pawn, turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard]);
+            board.MovePawnNumber(pawn, turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard], variant);
             if(turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard].Type == 2)
             {
                 turnManager.players[(int)turnManager.currentTurn].playerHand.DiscardCard(selectedCard);
@@ -113,9 +115,17 @@ public class UIManager : MonoBehaviour
             {
                 secondSeven = true;
             }
-            else
+            else if(!(!secondEleven && turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard].Type == 11 && variant != 0))
             {
                 DiscardCard(true);
+            }
+            if(board.CheckWin(turnManager.currentTurn))
+            {
+                DisplayWin();
+            }
+            else
+            {
+                turnManager.EndTurn();
             }
         }
     }
@@ -136,7 +146,6 @@ public class UIManager : MonoBehaviour
         if (overrideRequirements || !turnManager.players[(int)turnManager.currentTurn].playerHand.CheckPlayableCard(turnManager.currentTurn, board))
         {
             turnManager.players[(int)turnManager.currentTurn].playerHand.DiscardCard(selectedCard);
-            turnManager.EndTurn();
             afterCardSelect.enabled = false;
             afterCardPlay.enabled = true;
         }

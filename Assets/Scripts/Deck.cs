@@ -21,6 +21,7 @@ public class Deck : MonoBehaviour
     void Start()
     {
         populateDeck();
+        VerfyDeckPopulated();
         shuffleDeck();
     }
 
@@ -30,7 +31,6 @@ public class Deck : MonoBehaviour
         if (deck.Count() == 0)
         {
             shuffleDiscard();
-
         }
     }
 
@@ -71,5 +71,19 @@ public class Deck : MonoBehaviour
         deck = discard;
         discard = new List<Card>();
         shuffleDeck();
+    }
+
+    public void VerfyDeckPopulated()
+    {
+        for (int i = 0; i < deck.Count(); i++)
+        {
+            Debug.Log(deck[i].ToString());
+        }
+        if (deck.Count() != 45)
+        {
+            Debug.LogError("Deck not populated!");
+            return;
+        }
+        Debug.Log("Deck populated!");
     }
 }

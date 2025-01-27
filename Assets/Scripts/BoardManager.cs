@@ -231,6 +231,26 @@ public class BoardManager : MonoBehaviour
 		}
 	}
 
+	public bool CheckWin(E_Color color)
+	{
+		int wincheck = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			foreach (Pawn pawn in pawns)
+			{
+				if (pawn.color == color && pawn.location.nextSpace == null)
+				{
+					wincheck++;
+				}
+			}
+			if (wincheck == 4)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void Slide(int distance, Pawn pawn) {
 		BoardSpace space = pawn.location;
 		for (int i = 1; i < distance; i++)
@@ -261,8 +281,12 @@ public class BoardManager : MonoBehaviour
 
 	public void MovePawn7(Pawn pawn, int selection) {
 		// move the pawn an amount
-		MovePawnNumber(pawn, selection);
-		// select new pawn and move that one the remaining amount
+		MovePawnNumber(pawn, 7 - selection);
+		if (selection > 0)
+		{
+			// select new pawn and move that one the remaining amount
+
+		}
 	}
 
 	public void MovePawn10(Pawn pawn, int selection) {

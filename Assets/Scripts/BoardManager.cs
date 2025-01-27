@@ -47,10 +47,10 @@ public class BoardManager : MonoBehaviour
 
 		// starts are ordered as red, blue, yellow, green
 		// Check if each of the different colored pawns were placed into the right spots
-		Debug.Log(red.location == starts[0]);
-		Debug.Log(blue.location == starts[1]);
-		Debug.Log(yellow.location == starts[2]);
-		Debug.Log(green.location == starts[3]);
+		Debug.Log("Is red in its start location? " + ((red.location == starts[0]) ? "Yes" : "No"));
+		Debug.Log("Is blue in its start location? " + ((blue.location == starts[1]) ? "Yes" : "No"));
+		Debug.Log("Is yellow in its start location? " + ((yellow.location == starts[2]) ? "Yes" : "No"));
+		Debug.Log("Is green in its start location? " + ((green.location == starts[3]) ? "Yes" : "No"));
 
 		// cleanup the environment
 		pawns.Remove(red);
@@ -85,17 +85,17 @@ public class BoardManager : MonoBehaviour
 		MovePawnNumber(blue, 1);
 		MovePawnNumber(blue, -11);
 
-		Debug.Log(red.location.nextSpace == blue.location);
+		Debug.Log("Is red behind the blue pawn?" + ((red.location.nextSpace == blue.location) ? "Yes" : "No"));
 
 		// move infront of the blue pawn
 		MovePawnNumber(red, 2);
 
-		Debug.Log(red.location.prevSpace == blue.location);
+		Debug.Log("Is red infront of the blue pawn?" + ((red.location.prevSpace == blue.location) ? "Yes" : "No"));
 
 		// move on the blue pawn, capturing it
 		MovePawnNumber(red, -1);
 
-		Debug.Log(blue.location == starts[1]);
+		Debug.Log("Did blue return to it's starting location?" + ((blue.location == starts[1]) ? "Yes" : "No"));
 
 		// Cleanup the environment
 		pawns.Remove(red);

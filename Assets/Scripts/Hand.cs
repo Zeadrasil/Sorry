@@ -8,7 +8,7 @@ public class Hand
 
     public void AddCard()
     {
-        //cards.Add(deck.DrawCard());
+        cards.Add(deck.drawCard());
     }
 
     public void DiscardCard(int cardIndex)

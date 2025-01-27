@@ -76,6 +76,10 @@ public class Deck : MonoBehaviour
 
     public void VerfyDeckPopulated()
     {
-        Debug.Log(deck);
+        for (int i = 0; i < deck.Count(); i++)
+        {
+            Debug.Log(deck[i].ToString());
+        }
+        Debug.Log(deck.Count());
     }
 }

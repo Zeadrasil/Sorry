@@ -11,17 +11,21 @@ public class BoardSpace : MonoBehaviour
 
 	public BoardSpace Traverse(int distance, E_Color pawnColor)
 	{
-		BoardSpace toReturn = nextSpace;
-		if (goingHome != null)
-		{
-			toReturn = goingHome;
-		}
-
 		try
 		{
-			for (int i = 0; i < Mathf.Abs(distance) - 1; i++)
+			BoardSpace toReturn = nextSpace;
+			if (distance < 0)
 			{
-				if (distance > 0)
+				toReturn = prevSpace;
+			}
+			else if (goingHome != null)
+			{
+				toReturn = goingHome;
+			}
+
+			if (distance > 0)
+			{
+				for (int i = 0; i < distance - 1; i++)
 				{
 					if (toReturn.goingHome != null)
 					{
@@ -32,18 +36,20 @@ public class BoardSpace : MonoBehaviour
 						toReturn = toReturn.nextSpace;
 					}
 				}
-				else
+			}
+			else
+			{
+				for (int i = 0; i > distance + 1 ; i--)
 				{
 					toReturn = toReturn.prevSpace;
 				}
-				
 			}
+
+			return toReturn;
 		}
 		catch
 		{
 			return null;
 		}
-
-		return toReturn;
 	}
 }

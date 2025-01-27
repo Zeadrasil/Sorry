@@ -22,7 +22,15 @@ public class UIManager : MonoBehaviour
     public Canvas variantSelectionScreen;
     public TMP_Text variantDescriptionA;
     public TMP_Text variantDescriptionB;
-    public TMP_Text[][][] cardDataHolders;
+    public TMP_Text[] redCardLabels;
+    public TMP_Text[] greenCardLabels;
+    public TMP_Text[] blueCardLabels;
+    public TMP_Text[] yellowCardLabels;
+    public TMP_Text[] redCardDescriptions;
+    public TMP_Text[] greenCardDescriptions;
+    public TMP_Text[] blueCardDescriptions;
+    public TMP_Text[] yellowCardDescriptions;
+    public TMP_Text[,,] cardDataHolders;
 
     public void TransitionPlayerScene()
     {
@@ -58,6 +66,7 @@ public class UIManager : MonoBehaviour
                     redTurn.enabled = true;
                     break;
             }
+            UpdateDisplay();
         }
     }
 
@@ -114,6 +123,7 @@ public class UIManager : MonoBehaviour
         }
         transitionScreen.enabled = true;
         startMenu.enabled = false;
+        UpdateDisplay();
     }
 
     private void Start()
@@ -125,6 +135,19 @@ public class UIManager : MonoBehaviour
         transitionScreen.enabled = false;
         variantSelectionScreen.enabled = false;
         winMenu.enabled = false;
+
+        cardDataHolders = new TMP_Text[4, 2, 4];
+        for(int i = 0; i < 4; i++)
+        {
+            cardDataHolders[0, 0, i] = redCardLabels[i];
+            cardDataHolders[1, 0, i] = blueCardLabels[i];
+            cardDataHolders[2, 0, i] = yellowCardLabels[i];
+            cardDataHolders[3, 0, i] = greenCardLabels[i];
+            cardDataHolders[0, 1, i] = redCardDescriptions[i];
+            cardDataHolders[1, 1, i] = blueCardDescriptions[i];
+            cardDataHolders[2, 1, i] = yellowCardDescriptions[i];
+            cardDataHolders[3, 1, i] = greenCardDescriptions[i];
+        }
     }
 
     public void DisplayWin()
@@ -170,8 +193,8 @@ public class UIManager : MonoBehaviour
         {
             if(i < turnManager.players[(int)turnManager.currentTurn].playerHand.cards.Count)
             {
-                cardDataHolders[(int)turnManager.currentTurn][i][0].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].ToString();
-                cardDataHolders[(int)turnManager.currentTurn][i][1].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].Description;
+                cardDataHolders[(int)turnManager.currentTurn, 0, i].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].ToString();
+                cardDataHolders[(int)turnManager.currentTurn, 1, i].text = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[i].Description;
             }
         }
     }

@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
         Vector3 position = camera.ScreenToWorldPoint(Input.mousePosition);
         foreach (Pawn pawn in board.GetMoveablePawns(turnManager.currentTurn, turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard]))
          {
-            if (Vector3.Distance(pawn.gameObject.transform.position, position) < 1)
+            if (Vector3.Distance(pawn.gameObject.transform.position, position) < 2f/7f)
             {
                 return pawn;
             }

@@ -31,7 +31,6 @@ public class Deck : MonoBehaviour
         if (deck.Count() == 0)
         {
             shuffleDiscard();
-
         }
     }
 
@@ -80,6 +79,11 @@ public class Deck : MonoBehaviour
         {
             Debug.Log(deck[i].ToString());
         }
-        Debug.Log(deck.Count());
+        if (deck.Count() != 45)
+        {
+            Debug.LogError("Deck not populated!");
+            return;
+        }
+        Debug.Log("Deck populated!");
     }
 }

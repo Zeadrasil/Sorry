@@ -22,4 +22,16 @@ public class Hand
             cards.RemoveAt(cardIndex);
         }
     }
+
+    public bool CheckPlayableCard(E_Color player, BoardManager boardManager)
+    {
+        foreach(Card card in cards)
+        {
+            if(boardManager.GetMoveablePawns(player, card).Count > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

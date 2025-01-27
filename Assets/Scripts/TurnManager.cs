@@ -6,6 +6,7 @@ public class TurnManager : MonoBehaviour
     public Player[] players = new Player[4];
     public E_Color currentTurn = E_Color.Red;
     public BoardManager boardManager;
+    public UIManager uiManager;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class TurnManager : MonoBehaviour
         {
             players[(int)currentTurn].playerHand.AddCard();
         }
+        uiManager.UpdateDisplay();
         switch(currentTurn)
         {
             case E_Color.Red:

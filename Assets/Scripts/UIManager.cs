@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     public TurnManager turnManager;
     public new Camera camera;
     public int selectedCard = -1;
-    public bool variant = false;
+    public int variant = -1;
     public Canvas variantSelectionScreen;
     public TMP_Text variantDescriptionA;
     public TMP_Text variantDescriptionB;
@@ -73,14 +73,23 @@ public class UIManager : MonoBehaviour
     public Pawn SelectPawn()
     {
         Vector3 position = camera.ScreenToWorldPoint(Input.mousePosition);
-        //foreach (Pawn pawn in board.GetMoveablePawns(turnManager.currentTurn, turnManager.players[turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard]))
-        // {
-        //    if (Vector3.Distance(pawn.gameObject.transform.position, position) < 1)
-        //    {
-        //        return pawn;
-        //    }
-        //}
+        foreach (Pawn pawn in board.GetMoveablePawns(turnManager.currentTurn, turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard]))
+         {
+            if (Vector3.Distance(pawn.gameObject.transform.position, position) < 1)
+            {
+                return pawn;
+            }
+        }
         return null;
+    }
+
+    public void PlayCard()
+    {
+        Pawn pawn = SelectPawn();
+        if(pawn != null)
+        {
+            board.MovePawnNumber(pawn, turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard]);
+        }
     }
 
     public void SelectCard(int index)
@@ -93,9 +102,13 @@ public class UIManager : MonoBehaviour
             {
                 DisplayVariant("Move ten spaces forwards.", "Move one space backwards.");
             }
-           else if (type == 11)
+            else if (type == 11)
             {
                 DisplayVariant("Move eleven spaces forwards.", "Swap the positions of one of your pieces and another piece.");
+            }
+            else if(type == 7)
+            {
+
             }
         }
     }
@@ -107,7 +120,7 @@ public class UIManager : MonoBehaviour
         variantSelectionScreen.enabled = true;
     }
 
-    public void SelectVariant(bool variantSelected)
+    public void SelectVariant(int variantSelected)
     {
         variant = variantSelected;
         variantSelectionScreen.enabled = false;

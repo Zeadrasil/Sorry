@@ -18,7 +18,7 @@ public class BoardSpace : MonoBehaviour
 			{
 				toReturn = prevSpace;
 			}
-			else if (goingHome != null)
+			else if (goingHome != null && goingHome.homeColor == pawnColor)
 			{
 				toReturn = goingHome;
 			}

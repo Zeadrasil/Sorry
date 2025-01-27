@@ -17,41 +17,41 @@ public class BoardManager : MonoBehaviour
 		}
 	}
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Z))
-		{
-			MovePawnNumber(pawns[0], new Card(1,""));
-		}
-		if (Input.GetKeyDown(KeyCode.X))
-		{
-			MovePawnNumber(pawns[0], new Card(-4, ""));
-		}
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			MovePawnNumber(pawns[1], new Card(1, ""));
-		}
-		if (Input.GetKeyDown(KeyCode.V))
-		{
-			MovePawnNumber(pawns[1], new Card(-4, ""));
-		}
-		if (Input.GetKeyDown(KeyCode.B))
-		{
-			MovePawnNumber(pawns[2], new Card(1, ""));
-		}
-		if (Input.GetKeyDown(KeyCode.N))
-		{
-			MovePawnNumber(pawns[2], new Card(-4, ""));
-		}
-		if (Input.GetKeyDown(KeyCode.M))
-		{
-			MovePawnNumber(pawns[3], new Card(1, ""));
-		}
-		if (Input.GetKeyDown(KeyCode.Comma))
-		{
-			MovePawnNumber(pawns[3], new Card(-4, ""));
-		}
-	}
+	//private void Update()
+	//{
+	//	if (Input.GetKeyDown(KeyCode.Z))
+	//	{
+	//		MovePawnNumber(pawns[0], new Card(1,""));
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.X))
+	//	{
+	//		MovePawnNumber(pawns[0], new Card(-4, ""));
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.C))
+	//	{
+	//		MovePawnNumber(pawns[1], new Card(1, ""));
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.V))
+	//	{
+	//		MovePawnNumber(pawns[1], new Card(-4, ""));
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.B))
+	//	{
+	//		MovePawnNumber(pawns[2], new Card(1, ""));
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.N))
+	//	{
+	//		MovePawnNumber(pawns[2], new Card(-4, ""));
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.M))
+	//	{
+	//		MovePawnNumber(pawns[3], new Card(1, ""));
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.Comma))
+	//	{
+	//		MovePawnNumber(pawns[3], new Card(-4, ""));
+	//	}
+	//}
 
 	public List<Pawn> GetMoveablePawns(E_Color playerColor, Card usedCard) {
 		List<Pawn> gottenpawns = new List<Pawn>();

@@ -21,6 +21,7 @@ public class Deck : MonoBehaviour
     void Start()
     {
         populateDeck();
+        VerfyDeckPopulated();
         shuffleDeck();
     }
 
@@ -71,5 +72,10 @@ public class Deck : MonoBehaviour
         deck = discard;
         discard = new List<Card>();
         shuffleDeck();
+    }
+
+    public void VerfyDeckPopulated()
+    {
+        Debug.Log(deck);
     }
 }

@@ -4302,12 +4302,14 @@ MonoBehaviour:
   pawns:
   - {fileID: 382275865}
   - {fileID: 2001014825}
+  uiManager: {fileID: 0}
   starts:
   - {fileID: 1666883380}
   - {fileID: 2075802872}
   - {fileID: 444296271}
   - {fileID: 1592561145}
   deck: {fileID: 0}
+  TestPawn: {fileID: 1923682317478775053, guid: 75e42a2699f9bb44fbde4e91e2172c71, type: 3}
 --- !u!4 &1913028387
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour
@@ -11,37 +10,124 @@ public class BoardManager : MonoBehaviour
 	[SerializeField] public List<BoardSpace> starts;
 	public Deck deck;
 
+	[SerializeField] private Pawn TestPawn;
+
 	private void Start()
 	{
+		//TestPawnDeath();
+		//TestPawnCapture();
 		foreach (var pawn in pawns)
 		{
 			PawnDie(pawn);
 		}
 	}
 
-	private void Update()
+	private void TestPawnDeath()
 	{
-		if (Input.GetKeyDown(KeyCode.Z))
-		{
-			MovePawnNumber(pawns[0], new Card(1, ""));
-			print(GetMoveablePawns(pawns[0].color, new Card(-1, "")).Count);
-		}
-		if (Input.GetKeyDown(KeyCode.X))
-		{
-			MovePawnNumber(pawns[0], new Card(-4, ""));
-			print(GetMoveablePawns(pawns[0].color, new Card(-4, "")).Count);
-		}
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			MovePawnNumber(pawns[1], new Card(1, ""));
-			print(GetMoveablePawns(pawns[0].color, new Card(-1, "")).Count);
-		}
-		if (Input.GetKeyDown(KeyCode.V))
-		{
-			MovePawnNumber(pawns[1], new Card(-4, ""));
-			print(GetMoveablePawns(pawns[0].color, new Card(-4, "")).Count);
-		}
+		// initialize pawns
+		Pawn red = Instantiate(TestPawn.gameObject).GetComponent<Pawn>();
+		red.color = E_Color.Red;
+		Pawn blue = Instantiate(TestPawn.gameObject).GetComponent<Pawn>();
+		blue.color = E_Color.Blue;
+		Pawn yellow = Instantiate(TestPawn.gameObject).GetComponent<Pawn>();
+		yellow.color = E_Color.Yellow;
+		Pawn green = Instantiate(TestPawn.gameObject).GetComponent<Pawn>();
+		green.color = E_Color.Green;
+
+		pawns.Add(red);
+		pawns.Add(blue);
+		pawns.Add(yellow);
+		pawns.Add(green);
+
+		// reset pawns intro proper locations
+		PawnDie(red);
+		PawnDie(blue);
+		PawnDie(yellow);
+		PawnDie(green);
+
+		// starts are ordered as red, blue, yellow, green
+		// Check if each of the different colored pawns were placed into the right spots
+		Debug.Log(red.location == starts[0]);
+		Debug.Log(blue.location == starts[1]);
+		Debug.Log(yellow.location == starts[2]);
+		Debug.Log(green.location == starts[3]);
+
+		// cleanup the environment
+		pawns.Remove(red);
+		pawns.Remove(blue);
+		pawns.Remove(yellow);
+		pawns.Remove(green);
+
+		Destroy(red.gameObject);
+		Destroy(blue.gameObject);
+		Destroy(yellow.gameObject);
+		Destroy(green.gameObject);
 	}
+
+	public void TestPawnCapture()
+	{
+		// Initialize Pawns
+		Pawn red = Instantiate(TestPawn.gameObject).GetComponent<Pawn>();
+		red.color = E_Color.Red;
+		Pawn blue = Instantiate(TestPawn.gameObject).GetComponent<Pawn>();
+		blue.color = E_Color.Blue;
+
+		pawns.Add(red);
+		pawns.Add(blue);
+
+		// reset pawns intro proper locations
+		PawnDie(red);
+		PawnDie(blue);
+
+		// Move pawns so that red is behind blue on the board
+		MovePawnNumber(red, 1); // 1 is to move out of the start space
+		MovePawnNumber(red, 3);
+		MovePawnNumber(blue, 1);
+		MovePawnNumber(blue, -11);
+
+		Debug.Log(red.location.nextSpace == blue.location);
+
+		// move infront of the blue pawn
+		MovePawnNumber(red, 2);
+
+		Debug.Log(red.location.prevSpace == blue.location);
+
+		// move on the blue pawn, capturing it
+		MovePawnNumber(red, -1);
+
+		Debug.Log(blue.location == starts[1]);
+
+		// Cleanup the environment
+		pawns.Remove(red);
+		pawns.Remove(blue);
+
+		Destroy(red.gameObject);
+		Destroy(blue.gameObject);
+	}
+
+	//private void Update()
+	//{
+	//	if (Input.GetKeyDown(KeyCode.Z))
+	//	{
+	//		MovePawnNumber(pawns[0], new Card(1, ""));
+	//		print(GetMoveablePawns(pawns[0].color, new Card(-1, "")).Count);
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.X))
+	//	{
+	//		MovePawnNumber(pawns[0], new Card(-4, ""));
+	//		print(GetMoveablePawns(pawns[0].color, new Card(-4, "")).Count);
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.C))
+	//	{
+	//		MovePawnNumber(pawns[1], new Card(1, ""));
+	//		print(GetMoveablePawns(pawns[0].color, new Card(-1, "")).Count);
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.V))
+	//	{
+	//		MovePawnNumber(pawns[1], new Card(-4, ""));
+	//		print(GetMoveablePawns(pawns[0].color, new Card(-4, "")).Count);
+	//	}
+	//}
 
 	public List<Pawn> GetMoveablePawns(E_Color playerColor, Card usedCard) {
 		List<Pawn> gottenpawns = new List<Pawn>();
@@ -208,5 +294,6 @@ public class BoardManager : MonoBehaviour
 	public void MovePawnSorry(Pawn pawn) {
 		// Move a pawn in the start position from start to enemy pawn
 		// set the current pawn location to gotten pawn's location
+		// pawn.location = uiManager.getenemypawn(pawn.color).location
 	}
 }

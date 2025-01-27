@@ -13,8 +13,8 @@ public class Deck : MonoBehaviour
 
 {
     public Random RNG = new Random();
-    public List<Card> deck;
-    public List<Card> discard;
+    public List<Card> deck = new List<Card>();
+    public List<Card> discard = new List<Card>();
     public List<CardData> prefabs = new List<CardData>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -55,26 +55,21 @@ public class Deck : MonoBehaviour
     }
     public void populateDeck()
     {
-        int prefabIndex = 0;
-        int chkMax = 0;
-        int reqCardAmount = 5;
-        for (int i = 0; i < reqCardAmount && chkMax < 45; i++, chkMax++)
+        for (int i = 0; i < prefabs.Count; i++)
         {
-            CardData c = prefabs[prefabIndex];
-            Card card = new Card(c.Type, c.Description);
-            //Card card = prefabs[prefabIndex].GetComponent<Card>();
-            deck.Add(card);
-            if (i == reqCardAmount - 1)
+            for (int j = 0; j < 4; j++)
             {
-                prefabIndex++;
-                reqCardAmount = 4;
+                CardData c = prefabs[i];
+                Card card = new Card(c.Type, c.Description);
+                deck.Add(card);
             }
         }
+        deck.Add(new Card(prefabs[1].Type, prefabs[1].Description));
     }
     public void shuffleDiscard()
     {
         deck = discard;
-        discard.Clear();
+        discard = new List<Card>();
         shuffleDeck();
     }
 }

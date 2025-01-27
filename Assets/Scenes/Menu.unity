@@ -3169,7 +3169,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 752971498}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2132630516}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: TransitionPlayerScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &752971498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3674,7 +3686,7 @@ MonoBehaviour:
   - {fileID: 1933348477}
   - {fileID: 816579724}
   - {fileID: 702844816}
-  deck: {fileID: 0}
+  deck: {fileID: 1741979238}
 --- !u!4 &832948558
 Transform:
   m_ObjectHideFlags: 0
@@ -6951,20 +6963,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6232d363dd0fe49b54cd1bd8e1daec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deck: []
-  discard: []
   prefabs:
-  - {fileID: 2606288740869034983, guid: 87767bed3224bf94598f529b71994617, type: 3}
-  - {fileID: 6490413341726624805, guid: ec4a54e9549a97246984806899825735, type: 3}
-  - {fileID: 3135681975717243732, guid: b5b0361f7b4536a4cb619e3bec294e59, type: 3}
-  - {fileID: 3972155824071763773, guid: 5437068f488f0784e88770e604d62175, type: 3}
-  - {fileID: 7859857086391686716, guid: 85d6a70306cf9f4419e25b6ae8cc34e2, type: 3}
-  - {fileID: 5156596513675105429, guid: 97904d6eac50c68469452ac49bc9058a, type: 3}
-  - {fileID: 7658750198681580272, guid: dd637e03be9f4784c8bd60ef325f190a, type: 3}
-  - {fileID: 7129001288228686851, guid: f6de8906fe6dc614482a344a66818f48, type: 3}
-  - {fileID: 8091312310887964805, guid: c8e17525f1e536d479f83b1b13389297, type: 3}
-  - {fileID: 7194229359066662465, guid: db70f29e599673a4e9e447b85333c918, type: 3}
-  - {fileID: 4425180842077720871, guid: b792fcae1d4468d4d8d339750220e4ca, type: 3}
+  - {fileID: 11400000, guid: 1ba1f7409bcccb848b76415b7a3da392, type: 2}
+  - {fileID: 11400000, guid: 50a93bb3bfbc1a44682ffb15231226f7, type: 2}
+  - {fileID: 11400000, guid: 3287fc3c000cb47449362c301f612058, type: 2}
+  - {fileID: 11400000, guid: 5782011c5233c4349a3fabc6826616ca, type: 2}
+  - {fileID: 11400000, guid: 6526d03bf7d5c2a4cb5dd6db08dfd034, type: 2}
+  - {fileID: 11400000, guid: 9d01a91a432bb3a42a6db1fdea94bfba, type: 2}
+  - {fileID: 11400000, guid: 60096dc20dd7bcf42add833599bcae77, type: 2}
+  - {fileID: 11400000, guid: e0ee6e2a78baa2e4c9b83ccc220f6fbf, type: 2}
+  - {fileID: 11400000, guid: b673da81537ae9547a149bff4f532481, type: 2}
+  - {fileID: 11400000, guid: 3a96574a362847b42b7f18a73a2e7835, type: 2}
+  - {fileID: 11400000, guid: b2ae8570a956d4f49869f351f659be22, type: 2}
 --- !u!1 &1748932406
 GameObject:
   m_ObjectHideFlags: 0
@@ -9279,7 +9289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 832948557}
-  chosencard: {fileID: 0}
   startMenu: {fileID: 346772771}
   winMenu: {fileID: 560524454}
   winText: {fileID: 0}

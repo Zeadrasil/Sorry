@@ -64,31 +64,31 @@ public class UIManager : MonoBehaviour
     public Pawn SelectPawn()
     {
         Vector3 position = camera.ScreenToWorldPoint(Input.mousePosition);
-        /*foreach(Pawn pawn in board.GetMoveablePawns(turnManager.currentTurn, turnManager.players[players[(int)currentTurn].playerHand.cards[selectedCard]))
-         *{
-         *  if(Vector3.Distance(pawn.gameObject.transform.position, position) < 1)
-         *    {
-         *      return pawn;
-         *  }
-         *}*/
+        //foreach (Pawn pawn in board.GetMoveablePawns(turnManager.currentTurn, turnManager.players[turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard]))
+        // {
+        //    if (Vector3.Distance(pawn.gameObject.transform.position, position) < 1)
+        //    {
+        //        return pawn;
+        //    }
+        //}
         return null;
     }
 
     public void SelectCard(int index)
     {
-        /*if(board.GetMoveablePawns(turnManager.currentTurn, players[(int)currentTurn].playerHand.cards[index]).Count > 0)
-        *{
-        *   selectedCard = index;
-        *   int type = players[(int)currentTurn].playerHand.cards[selectedCard].Type;
-        *   if(type == 10)
-        *   {
-        *       DisplayVariant("Move ten spaces forwards.", "Move one space backwards.");
-        *   }
-        *   else if(type == 11)
-        *   {
-        *       DisplayVariant("Move elecen spaces forwards.", "Swap the positions of one of your pieces and another piece.");
-        *   }
-        *}*/
+        if (board.GetMoveablePawns(turnManager.currentTurn, turnManager.players[(int)turnManager.currentTurn].playerHand.cards[index]).Count > 0)
+        {
+            selectedCard = index;
+            int type = turnManager.players[(int)turnManager.currentTurn].playerHand.cards[selectedCard].Type;
+            if (type == 10)
+            {
+                DisplayVariant("Move ten spaces forwards.", "Move one space backwards.");
+            }
+           else if (type == 11)
+            {
+                DisplayVariant("Move eleven spaces forwards.", "Swap the positions of one of your pieces and another piece.");
+            }
+        }
     }
 
     public void DisplayVariant(string optionADescription, string optionBDescription)

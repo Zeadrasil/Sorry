@@ -189,7 +189,7 @@ public class BoardManager : MonoBehaviour
 						}
 					}
                 }
-                if (previousPawn != null && pawn == previousPawn)
+                if ((previousPawn != null && pawn == previousPawn) || pawn.location.nextSpace == null)
                 {
                     canTraverse = false;
                 }
@@ -294,19 +294,16 @@ public class BoardManager : MonoBehaviour
 	public bool CheckWin(E_Color color)
 	{
 		int wincheck = 0;
-		for (int i = 0; i < 4; i++, wincheck = 0)
+		foreach (Pawn pawn in pawns)
 		{
-			foreach (Pawn pawn in pawns)
+			if (pawn.color == color && pawn.location.nextSpace == null)
 			{
-				if (pawn.color == color && pawn.location.nextSpace == null)
-				{
-					wincheck++;
-				}
+				wincheck++;
 			}
-			if (wincheck == 4)
-			{
-				return true;
-			}
+		}
+		if (wincheck == 4)
+		{
+			return true;
 		}
 		return false;
 	}

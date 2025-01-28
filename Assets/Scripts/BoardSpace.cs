@@ -27,7 +27,7 @@ public class BoardSpace : MonoBehaviour
 			{
 				for (int i = 0; i < distance - 1; i++)
 				{
-					if (toReturn.goingHome != null)
+					if (toReturn.goingHome != null && toReturn.homeColor == pawnColor)
 					{
 						toReturn = toReturn.goingHome;
 					}
